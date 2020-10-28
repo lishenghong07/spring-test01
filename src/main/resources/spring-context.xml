@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/util"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/util https://www.springframework.org/schema/util/spring-util.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!--开启注解-->
+    <context:component-scan base-package="com.qf.hong"/>
+
+    <!--bean 标签中的属性
+        id:指定的是对象的名称
+        class:指定的是对象的实体类路径
+        scope:指定的是生成不一样的对象（prototype）指定生成相同的对象（singleton）
+        init-method:初始化的方法（传入初始化的方法）
+        destroy-method：销毁的方法（传入销毁的方法）
+        lazy-init：是否在使用对象的时候创建对象
+    -->
+    <bean id="user" class="com.qf.hong.bean.User"
+          scope="prototype" init-method="init" destroy-method="destory"
+          lazy-init="true">
+
+        <!--property标签的属性
+        name:对象中的用户属性
+        value:给对象中的用户属性进行赋值
+        ref:对应到另一个对象
+        -->
+        <property name="username" value="果果"/>
+        <property name="password" value="123456"/>
+        <property name="address" ref="address"/>
+
+        <!--list集合
+        name:集合的名称
+        在标签下list->value标签下进行属性的赋值
+        -->
+        <property name="list">
+            <list>
+                <value>123</value>
+                <value>321</value>
+                <value>1234567</value>
+            </list>
+        </property>
+
+        <!--map集合
+        name:集合的名称
+        在标签下map->entry标签中对key,value值进行赋值
+        -->
+        <property name="map">
+            <map>
+                <entry key="1" value="123"></entry>
+                <entry key="2" value="321"></entry>
+                <entry key="3" value="1234567"></entry>
+            </map>
+        </property>
+
+
+  <!--
+        &lt;!&ndash;第二种给集合赋值的方法
+        list集合
+        &ndash;&gt;
+        <p:list id="list">
+            <value>123</value>
+            <value>123</value>
+            <value>123</value>
+        </p:list>
+        &lt;!&ndash;第二种给集合赋值的方法
+      map集合
+      &ndash;&gt;
+        <p:map id="map">
+            <entry key="1" value="123"></entry>
+            <entry key="2" value="123"></entry>
+            <entry key="3" value="123"></entry>
+        </p:map>
+        -->
+
+        <!--构造方法-->
+   <!--     <constructor-arg name="username" value="lili">
+
+        </constructor-arg>-->
+
+    </bean>
+
+    <!--一个实体类对象就对应一个bean-->
+    <bean id="address" class="com.qf.hong.bean.Address"></bean>
+</beans>
